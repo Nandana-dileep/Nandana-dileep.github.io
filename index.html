@@ -8,14 +8,17 @@
 </head>
 <body>
 
-  <header>
-    <h1>Nandana Dileep</h1>
-    <p>Portfolio</p>
+  <header class="header">
+    <h1 class="glow">Nandana Dileep</h1>
+    <p class="glob">Visual Art & Computer Science Portfolio</p>
   </header>
+
+  <!-- WebGL Canvas for rotating cube -->
+  <canvas id="webgl-canvas"></canvas>
 
   <nav>
     <a href="#art">🎨 Art</a>
-    <a href="#tech">💻 Tech/ Animation Projects</a>
+    <a href="#tech">💻 Tech Projects</a>
   </nav>
 
   <section id="art">
@@ -24,33 +27,101 @@
       <img src="art1.jpg" alt="Artwork 1" />
       <img src="art2.jpg" alt="Artwork 2" />
       <img src="art3.jpg" alt="Artwork 3" />
-      <img src="art4.jpg" alt="Artwork 4" />
+      
+      <img src="art5.jpg" alt="Artwork 5" />
+      
+    
       <!-- Add more artwork images -->
     </div>
   </section>
+
+  <!-- <section id="art2">
+  
+    <div class="gallery">
+      <img src="art4.jpg" alt="Artwork 1" />
+      <img src="art6.jpg" alt="Artwork 1" />
+      
+      
+    
+
+    </div>
+  </section> -->
 
   <section id="tech">
     <h2>Tech Projects</h2>
     <div class="projects">
       <div class="project">
         <img src="project1.png" alt="Project 1">
-        <h3>Interactive WebGL Demo - Terrain Generation</h3>
-        <p>A 3D terrrain generated from user input.</p>
-        <a href="https://nandana-dileep.github.io/Terrain-Gen-WebGL/" target="_blank">Live Demo</a>
+        <h3>Interactive WebGL Demo</h3>
+        <p>A 3D visualization built using Three.js and shaders.</p>
+        <a href="https://github.com/yourusername/project1" target="_blank">View on GitHub</a>
       </div>
       <div class="project">
         <img src="project2.png" alt="Project 2">
-        <h3>Rotation Icospheres</h3>
-        <p>HTML, CSS, Js, and WebGL</p>
-        <a href="https://nandana-dileep.github.io/Rotating-Icosphere/" target="_blank">Live Demo</a>
+        <h3>Data Visualization Tool</h3>
+        <p>Built in React + D3 to visualize climate data interactively.</p>
+        <a href="https://yourusername.github.io/project2" target="_blank">Live Demo</a>
       </div>
       <!-- Add more projects -->
+      <div class="project">
+        <video controls loop>
+          <source src="shakespeare nlp.mov" type="video/mov">
+          <source src="movie.ogg" type="video/ogg">
+          Your browser does not support the video tag.
+        </video>
+        
     </div>
   </section>
 
   <footer>
     © 2025 Nandana Dileep | Contact: 123456nandana@gmail.com
   </footer>
+
+  <!-- Three.js library -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.150.1/build/three.min.js"></script>
+  <script>
+    const canvas = document.getElementById('webgl-canvas');
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+    renderer.setSize(window.innerWidth, 300); // width x height of canvas
+
+    const scene = new THREE.Scene();
+
+    const camera = new THREE.PerspectiveCamera(30, window.innerWidth / 300, 0.50, 1000);
+    camera.position.z = 5;
+    
+
+    const geometry = new THREE.BoxGeometry();
+    const material = new THREE.MeshStandardMaterial({ color: 0x00ff00 });
+    const cube = new THREE.Mesh(geometry, material);
+    scene.add(cube);
+
+    // Add a directional light so the cube is visible
+    const light = new THREE.DirectionalLight(0xfffff, 1);
+    light.position.set(5, 5, 5);
+    scene.add(light);
+
+    function animate() {
+      requestAnimationFrame(animate);
+
+      cube.rotation.x += 0.01;
+      cube.rotation.y += 0.01;
+
+      renderer.render(scene, camera);
+    }
+
+    animate();
+
+    window.addEventListener('resize', () => {
+      const width = window.innerWidth;
+      const height = 300;
+      renderer.setSize(width, height);
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+    });
+  </script>
+
+
+
 
 </body>
 </html>
